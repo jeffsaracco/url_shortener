@@ -39,13 +39,20 @@ get '/clear' do
   redirect to('/')
 end
 
+get '/:shortened' do
+  url = db.execute( "select * from urls where shortened = ?", params[:shortened] )
+  if(url.count > 0)
+    db.execute("update urls set clicks = ? where shortened = ?", url.first[2] + 1, params[:shortened])
+    redirect to(url.first[0])
+  else
+    raise Sinatra::NotFound
+  end
+end
+
+not_found do
+  haml :not_found
+end
+
 def generate_url
   6.times.map { ('A'..'Z').to_a.sample }.join
 end
-
-# TODO
-# - when generating url, check if it exists, if so regenerate until it doesnt exist
-# - path to accept url
-# - 404 path
-# - if found, increase count and redirect
-# - if not found, redirect to 404
