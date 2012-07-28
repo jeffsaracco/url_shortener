@@ -1,14 +1,9 @@
 require 'sinatra'
+require 'haml'
+set :haml, :format => :html5
 
-get '/new' do
-  "<html>
-    <body>
-      <form action='/new' method='POST'>
-        <input type='url' name='url' placeholder='Enter URL here'>
-        <input type='submit' value='GO'>
-      </form>
-    </body>
-  </html>"
+get '/' do
+  haml :index
 end
 
 post '/new' do
