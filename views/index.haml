@@ -4,3 +4,17 @@
       %br
     %button{ type: "submit" }
       = "GO"
+  - if @urls.count > 0
+    %table
+      %tr
+        %th URL
+        %th Shortened
+        %th Clicks
+      - @urls.each do |url|
+        %tr
+          %td 
+            = url[0]
+          %td
+            = url[1]
+          %td
+            = url[2]

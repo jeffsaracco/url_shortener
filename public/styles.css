@@ -51,4 +51,11 @@ form button:hover {
   background: #1e2506;
   cursor: pointer;
 }
+
+.center table {
+  width: 500px;
+  background: white;
+  border: 1px solid black;
+  text-align: center;
+}
 </style>
