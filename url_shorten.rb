@@ -19,6 +19,8 @@ set :haml, :format => :html5
 
 get '/' do
   @urls = db.execute( "select * from urls" )
+  @host = request.host
+  @port = request.port
   haml :index
 end
 

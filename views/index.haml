@@ -15,6 +15,7 @@
           %td 
             = url[0]
           %td
-            = url[1]
+            %a{ href:"http://#{@host}:#{@port}/#{url[1]}" }
+              = url[1]
           %td
             = url[2]
