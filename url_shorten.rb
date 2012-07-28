@@ -23,14 +23,24 @@ get '/' do
 end
 
 post '/new' do
-  new_url = 6.times.map { ('A'..'Z').to_a.sample }.join
+  new_url = generate_url
+
+  while(db.execute( "select * from urls where shortened = ?", new_url ).count > 0) do
+    new_url = generate_url
+  end
+
   db.execute "insert into urls values ( ?, ?, 0, ? )", params["url"], new_url, Time.now.to_i
+
   redirect to('/')
 end
 
 get '/clear' do
   db.execute "delete from urls;"
   redirect to('/')
+end
+
+def generate_url
+  6.times.map { ('A'..'Z').to_a.sample }.join
 end
 
 # TODO
