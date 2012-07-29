@@ -1,21 +1,22 @@
 %div.center
-  %form{ action: "/new", method: "POST" }
-    %input{ id: "url-text", type: "url", name: "url", placeholder: "Enter URL here"}
-      %br
-    %button{ type: "submit" }
+  %form{ action: "/new", method: "POST", class: "well form-search" }
+    %input{ id: "url-text", type: "url", name: "url", placeholder: "Enter URL here", class: "input-medium search-query", autocomplete: "off" }
+    %button{ type: "submit", class: "btn btn-primary" }
       = "GO"
   - if @urls.count > 0
-    %table
-      %tr
-        %th URL
-        %th Shortened
-        %th Clicks
-      - @urls.each do |url|
+    %table{ class: "table table-striped" }
+      %thead
         %tr
-          %td 
-            = url[0]
-          %td
-            %a{ href:"http://#{@host}:#{@port}/#{url[1]}" }
-              = url[1]
-          %td
-            = url[2]
+          %th URL
+          %th Shortened
+          %th Clicks
+      %tbody
+        - @urls.each do |url|
+          %tr
+            %td
+              = url[0]
+            %td
+              %a{ href:"http://#{@host}:#{@port}/#{url[1]}" }
+                = url[1]
+            %td
+              = url[2]
